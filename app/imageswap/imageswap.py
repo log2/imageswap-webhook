@@ -147,7 +147,7 @@ def mutate():
             "patchtype": "JSONPatch",
         }
         admissionReview = {
-            "apiVersion": "admission.k8s.io/v1beta1",
+            "apiVersion": "admission.k8s.io/v1",
             "kind": "AdmissionReview",
             "response": admission_response,
         }
@@ -161,7 +161,7 @@ def mutate():
         }
 
         admissionReview = {
-            "apiVersion": "admission.k8s.io/v1beta1",
+            "apiVersion": "admission.k8s.io/v1",
             "kind": "AdmissionReview",
             "response": admission_response,
         }

@@ -26,7 +26,7 @@ ImageSwap v1.4.0 has major changes
 
 >**MAPS LOGIC:** There is a new [MAPS](#maps-mode) mode logic that has been added to allow for more flexibility in the image swapping logic.
 >The existing logic, referred to as `LEGACY` mode, is still available, but has been deprecated.
->To continue using the `LEGACY` mode logic set the `IMAGESWAP_MODE` environment variable accordingly. Please reference the [configuration](#configuration) section for more information. 
+>To continue using the `LEGACY` mode logic set the `IMAGESWAP_MODE` environment variable accordingly. Please reference the [configuration](#configuration) section for more information.
 
 >**Image Definition Preservation:** Updates have been made to how image definitions are processed during a swap. Previously the swap logic would drop the image org/project before adding the prefix (ie. `nginx/nginx-ingress:latest` would drop the `nginx/` portion of the image definition).
 >In v1.4.0+ the swap logic will preserve all parts of the image except the Registry (ie. `docker.io/nginx/nginx-ingress` will drop the `docker.io` only from the image definition).
@@ -48,16 +48,16 @@ ImageSwap v1.4.0 has major changes
 
 ## Prereqs
 
-Kubernetes 1.9.0 or above with the admissionregistration.k8s.io/v1beta1 (or higher) API enabled. Verify that by the following command:
+Kubernetes 1.9.0 or above with the admissionregistration.k8s.io/v1 (or higher) API enabled. Verify that by the following command:
 
 ```shell
-$ kubectl api-versions | grep admissionregistration.k8s.io/v1beta1
+kubectl api-versions | grep admissionregistration.k8s.io/v1
 ```
 
 The result should be:
 
 ```shell
-admissionregistration.k8s.io/v1beta1
+admissionregistration.k8s.io/v1
 ```
 
 In addition, the `MutatingAdmissionWebhook` and `ValidatingAdmissionWebhook` admission controllers should be added and listed in the correct order in the admission-control flag of kube-apiserver.
@@ -132,7 +132,7 @@ default::default.example.com
 docker.io::my.example.com/mirror-
 quay.io::quay.example3.com
 gitlab.com::registry.example.com/gitlab
-#gcr.io:: # This is a comment 
+#gcr.io:: # This is a comment
 cool.io::
 registry.internal.twr.io::registry.example.com
 harbor.geo.pks.twr.io::harbor2.com ###### This is a comment with many symbols
@@ -168,7 +168,7 @@ Example:
 `Exact` maps will be matched exactly against the `<source-image>` name and replaced with the `<target-image>` name. No inferences for registry (ie. `docker.io/`), or tag (ie. `:latest`) will be inferred for `Exact` maps.
 
 Exact image matches are handled before all other mapping rules.
- 
+
 #### Example MAPS Configs
 
 - Disable image swapping for all registries EXCEPT `gcr.io`
