@@ -147,7 +147,7 @@ test-clean:
 
 # Run all unit and functional tests for ImageSwap/ImageSwap-Init
 .PHONY: test-all
-test-all: test test-functional
+test-all: test-clean ns-create-test test-functional
 
 ###############################################################################
 # Misc Repo Targets ###########################################################
